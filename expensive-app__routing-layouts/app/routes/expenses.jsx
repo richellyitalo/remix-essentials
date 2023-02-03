@@ -14,6 +14,7 @@ export const styles = () => ({
 export default function ExpensesLayout() {
   return (
     <main>
+      <h1>Expenses layout</h1>
       <Outlet />
     </main>
   );
