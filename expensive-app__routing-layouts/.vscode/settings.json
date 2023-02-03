@@ -4,4 +4,5 @@
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "git.openRepositoryInParentFolders": "always",
 }
