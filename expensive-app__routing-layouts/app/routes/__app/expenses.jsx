@@ -17,7 +17,7 @@ const DUMMY_EXPENSES = [
     date: new Date("2023-05-01").toISOString(),
   },
   {
-    id: "e2",
+    id: "e3",
     title: "Expense #2",
     amount: 30.39,
     date: new Date("2023-08-01").toISOString(),
@@ -35,9 +35,11 @@ export const links = () => ({
 
 export default function ExpensesLayout() {
   return (
-    <main>
+    <>
       <Outlet />
-      <ExpensesList expenses={DUMMY_EXPENSES} />
-    </main>
+      <main>
+        <ExpensesList expenses={DUMMY_EXPENSES} />
+      </main>
+    </>
   );
 }

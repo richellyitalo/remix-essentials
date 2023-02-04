@@ -12,9 +12,6 @@ function MainHeader() {
           <li>
             <a href="/pricing">Pricing</a>
           </li>
-          <li>
-            <a href="/expenses">Expenses</a>
-          </li>
         </ul>
       </nav>
       <nav id="cta-nav">
