@@ -1,6 +1,6 @@
 import Title from "~/components/admin/shared/Title";
 import { POSTS } from "~/../data/dummy";
-import PostsAdminlist from "~/components/admin/post/PostsAdminList";
+import PostsAdminList from "~/components/admin/post/PostsAdminList";
 import AddLink from "~/components/admin/shared/AddLink";
 import { Outlet } from "@remix-run/react";
 
@@ -14,7 +14,7 @@ export default function ListPostsPage() {
         text="Add Post"
       />
 
-      <PostsAdminlist posts={POSTS} />
+      <PostsAdminList posts={POSTS} />
       <Outlet />
     </>
   );

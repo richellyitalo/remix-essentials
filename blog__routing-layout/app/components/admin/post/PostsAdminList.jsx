@@ -1,6 +1,6 @@
 import PostAdminListItem from "./PostAdminListItem";
 
-export default function PostsAdminlist({ posts }) {
+export default function PostsAdminList({ posts }) {
   return (
     <div>
       {posts.map((post) => (

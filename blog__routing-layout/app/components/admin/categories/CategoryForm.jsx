@@ -1,28 +1,17 @@
 import { Form, Link } from "@remix-run/react";
 import Title from "../shared/Title";
 
-export default function PostForm() {
+export default function CategoryForm() {
   return (
     <>
-      <Title className="text-center">New Post</Title>
+      <Title className="text-center">New Category</Title>
       <Form className="form-data">
         <p>
-          <label htmlFor="">Title</label>
+          <label htmlFor="">Name</label>
           <input
             type="text"
             name="title"
           />
-        </p>
-        <p>
-          <label htmlFor="">Title</label>
-          <textarea name="content" />
-        </p>
-        <p>
-          <label htmlFor="">Category</label>
-          <select>
-            <option>Cinema</option>
-            <option>Internet</option>
-          </select>
         </p>
         <p className="flex justify-end my-2">
           <Link to="..">Cancel</Link>
