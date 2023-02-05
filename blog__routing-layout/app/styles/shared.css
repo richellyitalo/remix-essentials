@@ -1,0 +1,8 @@
+html {
+  font-family: 'Rubik', sans-serif;
+}
+
+#site-header a.active {
+  color: purple;
+  font-weight: bold;
+}
