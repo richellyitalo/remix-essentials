@@ -6,7 +6,7 @@ export const POSTS = [
       "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
     category_id: 3,
     category: {
-      name: "Cinema",
+      name: "Cinema e Séries",
       id: 3,
     },
   },
@@ -96,10 +96,10 @@ export const CATEGORIES = [
   },
   {
     id: 2,
-    name: "Cinema",
+    name: "Cinema & Séries",
   },
   {
     id: 3,
-    name: "Tecnologia",
+    name: "Tecnologia e Games",
   },
 ];

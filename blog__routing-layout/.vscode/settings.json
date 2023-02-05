@@ -5,6 +5,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.indentSize": 2,
+    "editor.tabSize": 2,
     "git.openRepositoryInParentFolders": "always",
     "files.exclude": {
         "**/.git": true,
@@ -23,9 +24,7 @@
         "remix.config.js": true,
         "tailwind.config.js": true,
         "yarn.lock": true,
-        ".vscode": true,
         "build": true,
-        "public/build": true,
         "app/entry.client.jsx": true,
         "app/entry.server.jsx": true,
         "node_modules": true
@@ -41,10 +40,7 @@
         "remix.config.js",
         "tailwind.config.js",
         "yarn.lock",
-        ".vscode",
         "build",
-        ".vscode",
-        "public/build",
         "app/entry.client.jsx",
         "app/entry.server.jsx",
         "node_modules"
