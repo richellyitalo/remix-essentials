@@ -1,3 +1,17 @@
-export default function AddPostsPage() {
-  return <h3>Add post page</h3>;
+import { useNavigate } from "@remix-run/react";
+import PostForm from "~/components/admin/post/PostForm";
+import Modal from "~/components/util/Modal";
+
+export default function AddPostPage() {
+  const navigate = useNavigate();
+
+  function closeHandler() {
+    navigate("..");
+  }
+
+  return (
+    <Modal onClose={closeHandler}>
+      <PostForm />
+    </Modal>
+  );
 }

@@ -15,7 +15,7 @@ export default function PostAdminListItem({ post }) {
       <div className="text-right pl-2">
         <div>
           <Link
-            to=""
+            to={`/admin/posts/edit/${post.id}`}
             className="text-white text-lg hover:text-yellow-300"
           >
             Edit
