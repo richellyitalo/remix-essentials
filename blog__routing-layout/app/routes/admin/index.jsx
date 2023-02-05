@@ -1,3 +1,5 @@
-export default function IndexAdmin() {
-  return <h1>Index:Admin</h1>;
+import { redirect } from "@remix-run/node";
+
+export function loader () {
+  return redirect('/admin/posts');
 }

@@ -16,6 +16,7 @@ export default function SiteHeader() {
           <NavLink
             className="text-blue-500 hover:text-blue-800"
             to="/categories"
+            end
           >
             Categories
           </NavLink>
