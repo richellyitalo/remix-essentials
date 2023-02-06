@@ -29,10 +29,12 @@ export const meta = () => ({
   title: "Admin/Expenses",
 });
 
-export const links = () => ({
-  rel: "stylesheet",
-  href: expensesLayoutStyles,
-});
+export const links = () => [
+  {
+    rel: "stylesheet",
+    href: expensesLayoutStyles,
+  },
+];
 
 export default function ExpensesLayout() {
   return (
