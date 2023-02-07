@@ -43,7 +43,7 @@ export async function updateExpense(expenseData) {
   try {
     return await prisma.expense.update({
       where: {
-        id: 333,
+        id: expenseData.id,
       },
       data: {
         title: expenseData.title,
