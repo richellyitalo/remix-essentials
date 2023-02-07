@@ -8,7 +8,6 @@ import {
 } from "@remix-run/react";
 
 import mainStyles from "~/styles/shared.css";
-import MainHeader from "./components/navigation/MainHeader";
 
 export const meta = () => ({
   charset: "utf-8",
