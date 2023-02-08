@@ -2,7 +2,7 @@ import { redirect } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
-import { addExpense } from "~/data/expense.server";
+import { addExpense } from "~/data/expenses.server";
 import { validateExpenseRequestData } from "~/data/validation.server";
 
 export async function action({ request }) {

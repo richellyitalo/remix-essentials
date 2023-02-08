@@ -3,7 +3,9 @@ import {
   Link,
   useActionData,
   useLoaderData,
+  useMatches,
   useNavigation,
+  useParams,
 } from "@remix-run/react";
 
 function ExpenseForm({ expense }) {
@@ -12,7 +14,21 @@ function ExpenseForm({ expense }) {
   const validationErrors = useActionData();
   const { state } = useNavigation();
   const isSubmitting = state !== "idle";
-  const expenseData = useLoaderData();
+
+  // GET_ENTITY: #A get data from loader method on route
+  // const expenseData = useLoaderData();
+  // END GET_ENTITY: #A
+
+  // GET_ENTITY: #B
+  const matches = useMatches();
+  const params = useParams();
+  const { data: expenses } = matches.find(
+    (match) => match.id === "routes/__app/expenses"
+  );
+  const expenseData = expenses.find((expense) => expense.id === params.id);
+  console.log(matches)
+  // END GET_ENTITY: #B
+
   const defaultValues = expenseData
     ? {
         title: expenseData.title,
@@ -23,8 +39,7 @@ function ExpenseForm({ expense }) {
         title: "",
         amount: "",
         date: "",
-    };
-    console.log(defaultValues.date)
+      };
 
   // submit programmatically
   // function submitHandler(event) {
@@ -37,7 +52,7 @@ function ExpenseForm({ expense }) {
 
   return (
     <Form
-      method="post"
+      method={expenseData ? "patch" : "post"}
       className="form"
       id="expense-form"
       // onSubmit={submitHandler}
