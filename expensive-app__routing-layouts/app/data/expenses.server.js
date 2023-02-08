@@ -10,7 +10,8 @@ export async function addExpense(expenseData) {
       },
     });
   } catch (error) {
-    throw error;
+    throw new Error("Failed to add expense.");
+    // throw error;
   }
 }
 
@@ -22,7 +23,8 @@ export async function getExpenses() {
       },
     });
   } catch (error) {
-    throw error;
+    throw new Error("Failed to get expenses.");
+    // throw error;
   }
 }
 
@@ -34,7 +36,8 @@ export async function getExpense(id) {
       },
     });
   } catch (error) {
-    throw error;
+    throw new Error("Failed to get the expense.");
+    // throw error;
   }
 }
 
@@ -49,7 +52,8 @@ export async function updateExpense(id, expenseData) {
       },
     });
   } catch (error) {
-    throw error;
+    throw new Error("Failed to update expense.");
+    // throw error;
   }
 }
 
@@ -61,6 +65,7 @@ export async function deleteExpense(id) {
       },
     });
   } catch (error) {
-    throw error;
+    throw new Error("Failed to delete expense.");
+    // throw error;
   }
 }

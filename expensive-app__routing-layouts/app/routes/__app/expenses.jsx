@@ -1,6 +1,7 @@
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { FaDownload, FaPlus } from "react-icons/fa";
 import ExpensesList from "~/components/expenses/ExpensesList";
+import Error from "~/components/util/Error";
 import { getExpenses } from "~/data/expenses.server";
 
 import expensesLayoutStyles from "~/styles/expenses.css";
@@ -16,7 +17,7 @@ export const links = () => [
   },
 ];
 
-export function loader () {
+export function loader() {
   return getExpenses();
 }
 
@@ -32,13 +33,23 @@ export default function ExpensesLayout() {
             <FaPlus />
             <span>Add Expense</span>
           </Link>
-          <a href="/expenses/raw" target="_blank">
+          <a
+            href="/expenses/raw"
+            target="_blank"
+          >
             <FaDownload />
             <span>Access Raw Data</span>
           </a>
         </section>
 
-        {expenses.length === 0 && <h3>No one expense added.</h3>}
+        {expenses.length === 0 && (
+          <Error title="No expenses registered">
+            You can add one expense now{" "}
+            <Link to="add">
+              <strong>clicking here</strong>
+            </Link>
+          </Error>
+        )}
 
         <ExpensesList expenses={expenses} />
       </main>

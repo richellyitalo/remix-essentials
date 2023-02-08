@@ -9,6 +9,7 @@ export async function action({ request, params }) {
   const expenseId = params.id;
   const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
+  
   if (request.method === "PATCH") {
     try {
       validateExpenseRequestData(expenseData);
@@ -22,6 +23,7 @@ export async function action({ request, params }) {
   } else if (request.method === "DELETE") {
     await deleteExpense(expenseId);
 
+    // using useFetch to no show as error
     return {expenseId};
 
     // return redirect("/expenses");

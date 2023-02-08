@@ -1,3 +1,4 @@
+import { json } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -7,6 +8,7 @@ import {
   useNavigation,
   useParams,
 } from "@remix-run/react";
+import Error from "../util/Error";
 
 function ExpenseForm({ expense }) {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -26,8 +28,18 @@ function ExpenseForm({ expense }) {
     (match) => match.id === "routes/__app/expenses"
   );
   const expenseData = expenses.find((expense) => expense.id === params.id);
-  console.log(matches)
   // END GET_ENTITY: #B
+
+  if (params.id && !expenseData) {
+    return (
+      <div>
+        <h3>Expense not found</h3>
+        <p>
+          Go back to list of expenses <Link to="..">clicking here</Link>!
+        </p>
+      </div>
+    );
+  }
 
   const defaultValues = expenseData
     ? {

@@ -1,28 +1,12 @@
+import { useCatch, useLoaderData } from "@remix-run/react";
+import { json } from "react-router";
+import { Link } from "react-router-dom";
 import Chart from "~/components/expenses/Chart";
 import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
+import Error from "~/components/util/Error";
+import { getExpenses } from "~/data/expenses.server";
 
 import expenseStyles from "~/styles/expenses.css";
-
-const DUMMY_EXPENSES = [
-  {
-    id: "e1",
-    title: "Expense #1",
-    amount: 15.45,
-    date: new Date().toISOString(),
-  },
-  {
-    id: "e2",
-    title: "Expense #2",
-    amount: 30.39,
-    date: new Date("2023-05-01").toISOString(),
-  },
-  {
-    id: "e3",
-    title: "Expense #2",
-    amount: 30.39,
-    date: new Date("2023-08-01").toISOString(),
-  },
-];
 
 export const links = () => [
   {
@@ -31,11 +15,34 @@ export const links = () => [
   },
 ];
 
+export async function loader() {
+  const expenses = await getExpenses();
+  console.log(expenses);
+
+  if (!expenses || expenses.length === 0) {
+    throw json({ message: "aqui deu ruim" }, { status: 404 });
+  }
+
+  return expenses;
+}
+
 export default function ExpensesAnalysisPage() {
+  const expenses = useLoaderData();
   return (
     <main>
-      <Chart expenses={DUMMY_EXPENSES} />
-      <ExpenseStatistics expenses={DUMMY_EXPENSES} />
+      <Chart expenses={expenses} />
+      <ExpenseStatistics expenses={expenses} />
     </main>
+  );
+}
+
+export function CatchBoundary() {
+  return (
+    <Error title="No expenses registered">
+      <p>
+        You can add expenses throut the{" "}
+        <Link to="/expenses/add">form here.</Link>
+      </p>
+    </Error>
   );
 }
