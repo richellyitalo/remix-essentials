@@ -18,7 +18,7 @@ export async function action({ request, params }) {
   };
   const postId = params.postId;
   
-  if (request.method === "POST") {
+  if (request.method === "PATCH") {
     try {
       validatePostRequest(postData);
     } catch (error) {
