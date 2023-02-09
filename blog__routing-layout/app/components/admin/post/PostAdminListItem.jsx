@@ -1,8 +1,35 @@
-import { Link } from "@remix-run/react";
+import { Link, useActionData, useFetcher } from "@remix-run/react";
 
 export default function PostAdminListItem({ post }) {
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state !== "idle";
+
   function createMarkup(content) {
     return { __html: content };
+  }
+
+  function deletePostHandler() {
+    const proceed = confirm("Are you sure you want to delete this post?");
+
+    if (!proceed) {
+      return;
+    }
+
+    fetcher.submit(null, {
+      method: "DELETE",
+      action: `/admin/posts/edit/${post.id}`,
+    });
+  }
+
+  if (isSubmitting) {
+    return (
+      <div
+        key={post.id}
+        className="p-2 bg-purple-400 rounded mb-3 text-white flex justify-between drop-shadow-md hover:drop-shadow-sm"
+      >
+        Deleting...
+      </div>
+    );
   }
 
   return (
@@ -36,12 +63,13 @@ export default function PostAdminListItem({ post }) {
             Edit
           </Link>
         </div>
-        <Link
-          to=""
+        <button
+          type="button"
           className="text-sm text-red-200 hover:text-yellow-300"
+          onClick={deletePostHandler}
         >
           Delete
-        </Link>
+        </button>
       </div>
     </div>
   );

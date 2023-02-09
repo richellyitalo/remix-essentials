@@ -24,28 +24,12 @@ export function validatePostRequest(input) {
   }
 }
 
+/**
+ * Posts
+ */
+
 export async function getPosts({ limit = null } = {}) {
   try {
-    // const catId = "63e447e8ca8d78ce22dc7e26";
-    // const catId2 = "63e54187fee44c62e2806dec";
-
-    // await prisma.post.create({
-    //   data: {
-    //     title: "Post 1",
-    //     content: "Content 1",
-    //     categories: {
-    //       connect: [
-    //         {
-    //           id: catId,
-    //         },
-    //         {
-    //           id: catId2,
-    //         },
-    //       ],
-    //     },
-    //   },
-    // });
-
     let paramsFind = {
       orderBy: { createdAt: "desc" },
       include: {
@@ -108,6 +92,16 @@ export async function updatePost(id, postData) {
   }
 }
 
+export async function deletePost (id) {
+  try {
+    return await prisma.post.delete({
+      where: { id },
+    });
+  } catch (error) {
+    throw new Error("Failed to delete post");
+  }
+}
+
 export function validateCategoryRequest(input) {
   let validationErrors = {};
 
@@ -119,6 +113,10 @@ export function validateCategoryRequest(input) {
     throw validationErrors;
   }
 }
+
+/**
+ * Categories
+ */
 
 export async function addCategory(categoryData) {
   try {

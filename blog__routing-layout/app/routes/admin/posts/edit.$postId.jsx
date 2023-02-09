@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate } from "@remix-run/react";
 import PostForm from "~/components/admin/post/PostForm";
 import Modal from "~/components/util/Modal";
 import {
+  deletePost,
   getCategories,
   updatePost,
   validatePostRequest,
@@ -15,17 +16,21 @@ export async function action({ request, params }) {
     content: formData.get("content"),
     categories: formData.getAll("categories[]"),
   };
-
   const postId = params.postId;
-  console.log(postData);
-
-  try {
-    validatePostRequest(postData);
-  } catch (error) {
-    return error;
+  
+  if (request.method === "POST") {
+    try {
+      validatePostRequest(postData);
+    } catch (error) {
+      return error;
+    }
+  
+    await updatePost(postId, postData);
+  } else if (request.method === "DELETE") {
+    await deletePost(postId);
+    return {postId}
   }
 
-  await updatePost(postId, postData);
 
   return redirect("..");
 }
