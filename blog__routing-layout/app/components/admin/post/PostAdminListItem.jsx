@@ -23,20 +23,14 @@ export default function PostAdminListItem({ post }) {
 
   if (isSubmitting) {
     return (
-      <div
-        key={post.id}
-        className="p-2 bg-purple-400 rounded mb-3 text-white flex justify-between drop-shadow-md hover:drop-shadow-sm"
-      >
-        Deleting...
+      <div className="p-2 bg-purple-400 rounded mb-3 text-white flex justify-between drop-shadow-md hover:drop-shadow-sm">
+        Deleting post...
       </div>
     );
   }
 
   return (
-    <div
-      key={post.id}
-      className="p-2 bg-purple-700 rounded mb-3 text-white flex justify-between drop-shadow-md hover:drop-shadow-sm"
-    >
+    <div className="p-2 bg-purple-700 rounded mb-3 text-white flex justify-between drop-shadow-md hover:drop-shadow-sm">
       <div>
         <h2 className="font-semibold">{post.title}</h2>
         <p

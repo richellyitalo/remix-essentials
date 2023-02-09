@@ -176,3 +176,13 @@ export async function getCategory(categoryId) {
     throw new Error("Failed to get category");
   }
 }
+
+export async function deleteCategory (id) {
+  try {
+    return await prisma.category.delete({
+      where: { id },
+    });
+  } catch (error) {
+    throw new Error("Failed to delete category");
+  }
+}
