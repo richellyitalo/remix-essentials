@@ -1,22 +1,37 @@
-import { Link } from '@remix-run/react';
-import { POSTS } from '~/../data/dummy';
+import { Link, useLoaderData } from "@remix-run/react";
+import { getPost } from "~/data/blog.server";
 
-export default function PostPage () {
-    const post = POSTS[0];
+export function loader({ params }) {
+  const postId = params.id;
+  return getPost(postId);
+}
 
-    return (
-      <div className="post-detail">
-        <h1 className="text-2xl font-bold">{post.title}</h1>
-        <div>
-          <Link
-            to={`/categories/${post.category.id}`}
-            className="text-blue-500 underline hover:no-underline"
-          >
-            {post.category.name}
-          </Link>
-        </div>
+export default function PostPage() {
+  const post = useLoaderData();
+  function createMarkup(markup) {
+    return { __html: markup };
+  }
 
-        <div className="post-entry-text py-4">{post.content}</div>
+  return (
+    <div className="post-detail">
+      <h1 className="text-2xl font-bold">{post.title}</h1>
+      <div>
+        {post.categories &&
+          post.categories.map((category) => (
+            <Link
+              key={category.id}
+              to={`/categories/${category.id}`}
+              className="text-blue-500 underline hover:no-underline"
+            >
+              {category.name}
+            </Link>
+          ))}
       </div>
-    );
+
+      <div
+        className="post-entry-text py-4"
+        dangerouslySetInnerHTML={createMarkup(post.content)}
+      />
+    </div>
+  );
 }

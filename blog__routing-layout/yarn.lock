@@ -1255,6 +1255,23 @@
     tiny-glob "^0.2.9"
     tslib "^2.4.0"
 
+"@prisma/client@^4.10.0":
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.10.0.tgz#7b7cec082b7cb8885effff48ff4fff65e52dee11"
+  integrity sha512-sBmYb1S6SMKFIESaLMfKqWSalv3pH73cMCsFt9HslJvYjIIcKQCA6PDL2O4SZGWvc4JBef9cg5Gd7d9x3AtKjw==
+  dependencies:
+    "@prisma/engines-version" "4.10.0-84.ca7fcef713137fa11029d519a9780db130cca91d"
+
+"@prisma/engines-version@4.10.0-84.ca7fcef713137fa11029d519a9780db130cca91d":
+  version "4.10.0-84.ca7fcef713137fa11029d519a9780db130cca91d"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-4.10.0-84.ca7fcef713137fa11029d519a9780db130cca91d.tgz#db646ab604b5dc3529080b8fe900240c73e3a71a"
+  integrity sha512-UVpmVlvSaGfY4ue+hh8CTkIesbuXCFUfrr8zk//+u85WwkKfWMtt6nLB2tNSzR1YO8eAA8+HqNf8LM7mnXIq5w==
+
+"@prisma/engines@4.10.0":
+  version "4.10.0"
+  resolved "https://registry.npmjs.org/@prisma/engines/-/engines-4.10.0.tgz"
+  integrity sha512-ZPPo7q+nQZdTlPFedS7mFXPE3oZ2kWtTh3GO4sku0XQ8ikLqEyinuTPJbQCw/8qel2xglIEQicsK6yI4Jgh20A==
+
 "@remix-run/dev@^1.12.0":
   version "1.12.0"
   resolved "https://registry.npmjs.org/@remix-run/dev/-/dev-1.12.0.tgz"
@@ -5607,6 +5624,13 @@ pretty-ms@^7.0.1:
   dependencies:
     parse-ms "^2.1.0"
 
+prisma@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.npmjs.org/prisma/-/prisma-4.10.0.tgz"
+  integrity sha512-xUHcF3Glc8QGgW8x0rfPITvyyTo04fskUdG7pI4kQbvDX/rhzDP4046x/FvazYqYHXMLR5/KTIi2p2Gth5vKOQ==
+  dependencies:
+    "@prisma/engines" "4.10.0"
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
@@ -5730,14 +5754,14 @@ react-dom@^18.2.0:
 
 react-grid-system@^8.1.8:
   version "8.1.8"
-  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-8.1.8.tgz#2d21f153850f370008912373112490b6be598d4f"
+  resolved "https://registry.npmjs.org/react-grid-system/-/react-grid-system-8.1.8.tgz"
   integrity sha512-tZxYlbmiVMmsvnXbb0nTyLO7mNSL2dc/zYfF6cnsKtfe+MnOh6fx/5fG1NgRSB+9KZlQzBz0Ts4E6fjmlPmOuA==
   dependencies:
     prop-types "15.8.1"
 
 react-icons@^4.7.1:
   version "4.7.1"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
+  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.7.1.tgz"
   integrity sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==
 
 react-is@^16.13.1:

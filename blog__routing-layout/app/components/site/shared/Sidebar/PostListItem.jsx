@@ -1,6 +1,10 @@
 import { Link } from "@remix-run/react";
 
 export default function PostListItem({ category: post }) {
+  function createMarkup(markup) {
+    return { __html: markup };
+  }
+
   return (
     <div
       key={post.id}
@@ -12,7 +16,10 @@ export default function PostListItem({ category: post }) {
       >
         {post.title}
       </Link>
-      <p className="text-slate-400 text-sm">{post.content.substring(0, 100)} ...</p>
+      <p
+        className="text-slate-500 text-sm"
+        dangerouslySetInnerHTML={createMarkup(post.content.substring(0, 100))}
+      />
     </div>
   );
 }

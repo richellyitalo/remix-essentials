@@ -1,16 +1,27 @@
 import {
   Outlet,
+  useLoaderData,
   useLocation
 } from "@remix-run/react";
 import SiteHeader from "~/components/nav/SiteHeader";
 import { Row, Col } from "react-grid-system";
 
-import { CATEGORIES as categories, POSTS as posts } from "~/../data/dummy";
 import Sidebar from "~/components/site/shared/Sidebar/Sidebar";
+import { getCategories, getPosts } from "~/data/blog.server";
+
+export async function loader () {
+  const posts = await getPosts();
+  const categories = await getCategories();
+  return {
+    posts,
+    categories
+  };
+}
 
 
 export default function SiteLayout() {
   const location = useLocation();
+  const { posts, categories } = useLoaderData();
 
   const isCategoriesPage = ["/categories", "/categories/"].includes(
     location.pathname
@@ -19,7 +30,6 @@ export default function SiteLayout() {
   return (
     <div className="container mx-auto p-4 bg-gray-100">
       <SiteHeader />
-
       <Row>
         <Col sm={9}>
           <Outlet />

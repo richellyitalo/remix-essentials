@@ -1,10 +1,16 @@
 import Title from "~/components/admin/shared/Title";
-import { POSTS } from "~/../data/dummy";
 import PostsAdminList from "~/components/admin/post/PostsAdminList";
 import AddLink from "~/components/admin/shared/AddLink";
-import { Outlet } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
+import { getPosts } from "~/data/blog.server";
+
+export function loader () {
+  return getPosts();
+}
 
 export default function ListPostsPage() {
+  const posts = useLoaderData();
+
   return (
     <>
       <Title>Posts</Title>
@@ -14,7 +20,7 @@ export default function ListPostsPage() {
         text="Add Post"
       />
 
-      <PostsAdminList posts={POSTS} />
+      <PostsAdminList posts={posts} />
       <Outlet />
     </>
   );

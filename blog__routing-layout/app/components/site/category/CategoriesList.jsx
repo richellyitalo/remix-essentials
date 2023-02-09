@@ -10,12 +10,12 @@ export default function CategoriesList({ categories }) {
           sm={4}
         >
           <h3 className="font-semibold text-xl">{category.name}</h3>
-          <div className="mb-2 text-sm text-slate-400">15 posts</div>
+          <div className="mb-2 text-sm text-slate-400">{category.posts.length} posts</div>
           <Link
             to={`/categories/${category.id}`}
             className="bg-blue-700 px-2 rounded-md p-1 text-white"
           >
-            See posts
+            See post(s)
           </Link>
         </Col>
       ))}

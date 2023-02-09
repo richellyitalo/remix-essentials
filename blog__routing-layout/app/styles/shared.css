@@ -49,7 +49,7 @@ html {
 
 .modal {
   position: fixed;
-  top: 25vh;
+  top: 8vh;
   width: 30rem;
   border-radius: 6px;
   border: none;

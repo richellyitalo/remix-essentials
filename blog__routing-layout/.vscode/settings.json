@@ -22,12 +22,12 @@
         "package-lock.json": true,
         "README.md": true,
         "remix.config.js": true,
-        "tailwind.config.js": true,
         "yarn.lock": true,
         "build": true,
         "app/entry.client.jsx": true,
         "app/entry.server.jsx": true,
-        "node_modules": true
+        "node_modules": true,
+        "tailwind.config.js": true
     },
     "hide-files.files": [
         ".cache",
@@ -38,11 +38,11 @@
         "package-lock.json",
         "README.md",
         "remix.config.js",
-        "tailwind.config.js",
         "yarn.lock",
         "build",
         "app/entry.client.jsx",
         "app/entry.server.jsx",
-        "node_modules"
+        "node_modules",
+        "tailwind.config.js"
     ],
 }

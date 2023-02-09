@@ -2,11 +2,11 @@ import { redirect } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import CategoryForm from "~/components/admin/categories/CategoryForm";
 import Modal from "~/components/util/Modal";
-import { addCategory, validateCategoryRequest } from "~/data/blog.server";
+import { updateCategory, validateCategoryRequest } from "~/data/blog.server";
 
-export async function action({ request }) {
+export async function action({ request, params }) {
   const formData = await request.formData();
-
+  const categoryId = params.categoryId;
   const categoryData = Object.fromEntries(formData);
 
   try {
@@ -15,12 +15,12 @@ export async function action({ request }) {
     return error;
   }
 
-  await addCategory(categoryData);
+  await updateCategory(categoryId, categoryData);
 
   return redirect("..");
 }
 
-export default function AddCategoryPage() {
+export default function EditCategoryPage() {
   const navigate = useNavigate();
 
   function closeHandler() {

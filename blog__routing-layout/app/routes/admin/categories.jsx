@@ -1,10 +1,16 @@
 import Title from "~/components/admin/shared/Title";
-import { CATEGORIES } from "~/../data/dummy";
 import AddLink from "~/components/admin/shared/AddLink";
-import { Outlet } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import CategoriesAdminList from "~/components/admin/categories/CategoriesAdminList";
+import { getCategories } from "~/data/blog.server";
+
+export function loader () {
+  return getCategories();
+}
 
 export default function ListCategoriresPage() {
+  const categories = useLoaderData();
+
   return (
     <>
       <Title>Categorires</Title>
@@ -14,7 +20,7 @@ export default function ListCategoriresPage() {
         text="Add Category"
       />
 
-      <CategoriesAdminList categories={CATEGORIES} />
+      <CategoriesAdminList categories={categories} />
       <Outlet />
     </>
   );

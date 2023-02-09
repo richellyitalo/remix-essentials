@@ -1,11 +1,16 @@
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { Col, Row } from "react-grid-system";
-import { CATEGORIES, POSTS } from "~/../data/dummy";
 import PostsList from "~/components/site/post/PostList";
+import { getCategory } from "~/data/blog.server";
 
-const category = CATEGORIES[0];
+export function loader ({params}) {
+  const categoryId = params.categoryId;
+  return getCategory(categoryId);
+}
 
-export default function CategoriesDetailPage() {
+export default function CategoriesDetailPage () {
+  const category = useLoaderData();
+
   return (
     <>
       <Row>
@@ -27,7 +32,7 @@ export default function CategoriesDetailPage() {
           </Link>
         </Col>
       </Row>
-      <PostsList posts={POSTS} />
+      <PostsList posts={category.posts} />
     </>
   );
 }
