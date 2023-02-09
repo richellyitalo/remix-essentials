@@ -77,12 +77,12 @@ export default function PostForm({ categories = [] }) {
           <label htmlFor="">Category</label>
           <select
             name="categories[]"
+            defaultValue={defaultValues?.categories}
             multiple
           >
             {categories.map((category) => (
               <option
                 key={category.id}
-                selected={defaultValues?.categories.includes(category.id)}
                 value={category.id}
               >
                 {category.name}
