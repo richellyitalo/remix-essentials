@@ -5,10 +5,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
 
 import appStyles from "./styles/app.css";
-import sharedStyles from '~/styles/shared.css';
+import sharedStyles from "~/styles/shared.css";
+import Error from "./components/admin/shared/Error";
+import Code from "./components/admin/shared/Code";
 
 export const meta = () => ({
   charset: "utf-8",
@@ -40,7 +43,7 @@ export const links = () => [
   },
 ];
 
-export default function App() {
+function Document({ children }) {
   return (
     <html lang="en">
       <head>
@@ -48,11 +51,47 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        {children}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+export function CatchBoundary() {
+  const catchData = useCatch();
+
+  return (
+    <Document>
+      <Error title={catchData.statusText}>
+        <Code>
+          Catch from <b>"root.jsx"</b> file.
+        </Code>
+        <p>{catchData.data?.message || "Something went wrong"}</p>
+      </Error>
+    </Document>
+  );
+}
+
+export function ErrorBoundary({error}) {
+  return (
+    <Document>
+      <Error>
+        <Code>
+          ErrorBoundary on <b>"root.jsx"</b> file.
+        </Code>
+        <p>{error?.message || "Something went wrong"}</p>
+      </Error>
+    </Document>
+  );
+}
+
+export default function App() {
+  return (
+    <Document>
+      <Outlet />
+    </Document>
   );
 }

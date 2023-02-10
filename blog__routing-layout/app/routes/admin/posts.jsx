@@ -2,10 +2,22 @@ import Title from "~/components/admin/shared/Title";
 import PostsAdminList from "~/components/admin/post/PostsAdminList";
 import AddLink from "~/components/admin/shared/AddLink";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import { getPosts } from "~/data/blog.server";
+import { getCategories, getPosts } from "~/data/blog.server";
+import { json } from "@remix-run/node";
 
-export function loader () {
-  return getPosts();
+export async function loader() {
+  const posts = await getPosts();
+  const categories = await getCategories();
+
+
+  if (!categories || categories.length === 0) {
+    throw json(
+      { message: "At least a category its necessary to create a new Post." },
+      { status: 404, statusText: "No categories found." }
+    );
+  }
+
+  return posts;
 }
 
 export default function ListPostsPage() {
@@ -19,6 +31,12 @@ export default function ListPostsPage() {
         to="add"
         text="Add Post"
       />
+
+      {posts && posts.length === 0 && (
+        <div class="bg-amber-100 p-3 border border-yellow-500 rounded">
+          There are no registered posts.
+        </div>
+      )}
 
       <PostsAdminList posts={posts} />
       <Outlet />

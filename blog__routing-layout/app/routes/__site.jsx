@@ -1,5 +1,6 @@
 import {
   Outlet,
+  useCatch,
   useLoaderData,
   useLocation
 } from "@remix-run/react";
