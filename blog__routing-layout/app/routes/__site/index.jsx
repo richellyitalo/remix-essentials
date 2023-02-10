@@ -21,6 +21,8 @@ export async function loader() {
     //   }
     // );
   }
+
+  return posts;
 }
 
 export default function SiteHomePage() {
