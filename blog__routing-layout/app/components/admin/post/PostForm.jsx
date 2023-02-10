@@ -41,6 +41,29 @@ export default function PostForm({ categories = [] }) {
           categories: [],
         };
 
+  if (isEditing && !post) {
+    return (
+      <>
+        <h3 className="mb-2 text-red-400">Theres no post with this ID.</h3>
+        <p className="mb-3 border-b-3 border-slate-300 border-b-2 pb-3">
+          You can add a new post by{" "}
+          <Link
+            to="../add"
+            className="text-purple-500 font-bold hover:text-purple-400"
+          >
+            clicking here.
+          </Link>
+        </p>
+        <Link
+          to=".."
+          className="pt-1"
+        >
+          Close this panel
+        </Link>
+      </>
+    );
+  }
+
   return (
     <>
       <Title className="text-center">New Post</Title>

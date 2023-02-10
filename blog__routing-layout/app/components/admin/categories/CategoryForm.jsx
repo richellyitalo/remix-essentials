@@ -26,13 +26,37 @@ export default function CategoryForm() {
     category = categories.find((category) => category.id === params.categoryId);
   }
 
-  const defaultValues = isEditing
-    ? {
-        name: category.name,
-      }
-    : {
-        name: "",
-      };
+  const defaultValues =
+    category !== undefined
+      ? {
+          name: category.name,
+        }
+      : {
+          name: "",
+        };
+
+  if (isEditing && !category) {
+    return (
+      <>
+        <h3 className="mb-2 text-red-400">Theres no category with this ID.</h3>
+        <p className="mb-3 border-b-3 border-slate-300 border-b-2 pb-3">
+          You can add a new category by{" "}
+          <Link
+            to="../add"
+            className="text-purple-500 font-bold hover:text-purple-400"
+          >
+            clicking here.
+          </Link>
+        </p>
+        <Link
+          to=".."
+          className="pt-1"
+        >
+          Close this panel
+        </Link>
+      </>
+    );
+  }
 
   return (
     <>
