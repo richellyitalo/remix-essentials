@@ -13,13 +13,16 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "node_modules": true,
         "build": true,
-        ".cache": true
+        ".cache": true,
+        "node_modules": true
     },
     "hide-files.files": [
-        "node_modules",
         "build",
-        ".cache"
-    ]
+        ".cache",
+        "node_modules"
+    ],
+    "[prisma]": {
+        "editor.defaultFormatter": "Prisma.prisma"
+    }
 }

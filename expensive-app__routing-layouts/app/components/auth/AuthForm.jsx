@@ -1,8 +1,15 @@
-import { Form, Link, useNavigation, useSearchParams } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useNavigation,
+  useSearchParams,
+} from "@remix-run/react";
 import { FaLock, FaPlus } from "react-icons/fa";
 
 function AuthForm() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const validationErrors = useActionData();
 
   const authMode = searchParams.get("mode") || "login";
   const isLogin = authMode === "login";
@@ -10,10 +17,16 @@ function AuthForm() {
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state !== "idle";
-  
+
+  // function toggleModeHandler(event) {
+  //   event.preventDefault();
+  //   setSearchParams({ mode: isLogin ? "signup" : "login" });
+  // }
+
   let textSubmit = isLogin ? "Login" : "Sign Up";
+
   if (isSubmitting) {
-    textSubmit = isLogin ? "...Loging" : "...Sign Upping";
+    textSubmit = isLogin ? "...Loging" : "...Signing Up";
   }
 
   return (
@@ -34,6 +47,11 @@ function AuthForm() {
           required
         />
       </p>
+
+      {validationErrors && validationErrors.email && (
+        <div className="error-input-form">{validationErrors.email}</div>
+      )}
+
       <p>
         <label htmlFor="password">Password</label>
         <input
@@ -43,6 +61,15 @@ function AuthForm() {
           minLength={7}
         />
       </p>
+
+      {validationErrors && validationErrors.password && (
+        <div className="error-input-form">{validationErrors.password}</div>
+      )}
+
+      {validationErrors && validationErrors.credentials && (
+        <div className="error-input-form">{validationErrors.credentials}</div>
+      )}
+
       <div className="form-actions">
         <button disabled={isSubmitting}>{textSubmit}</button>
         {isLogin ? (
