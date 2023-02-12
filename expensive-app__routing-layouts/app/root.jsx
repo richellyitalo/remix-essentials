@@ -39,6 +39,7 @@ export const links = () => [
 ];
 
 function Document({ children, title }) {
+
   return (
     <html lang="en">
       <head>

@@ -1,6 +1,69 @@
-import { redirect } from "@remix-run/node";
-import { compare, hash } from "bcrypt";
+import { redirect, createCookieSessionStorage } from "@remix-run/node";
+import { compare, hash } from "bcryptjs";
 import { prisma } from "./database.server";
+
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
+const sessionStorage = createCookieSessionStorage({
+  cookie: {
+    secure: process.env.NODE_ENV === "production",
+    secrets: [SESSION_SECRET],
+    sameSite: "lax",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    httpOnly: true,
+  },
+});
+
+const { getSession, commitSession } = sessionStorage;
+
+export async function getSessionUserId(request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  const userId = session.get("userId");
+
+  if (!userId) {
+    return null;
+  }
+
+  return userId;
+}
+
+export async function destroySession(request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await sessionStorage.destroySession(session),
+    },
+  });
+}
+
+export async function requireUserSession(request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+
+  const userId = session.get("userId");
+  if (!userId) {
+    throw redirect("/auth?mode=login");
+  }
+
+  return userId;
+}
+
+export async function createUserSession(userId, redirectPath) {
+  const session = await sessionStorage.getSession();
+  session.set("userId", userId);
+
+  return redirect(redirectPath, {
+    headers: {
+      "Set-Cookie": await sessionStorage.commitSession(session),
+    },
+  });
+}
 
 export async function signup({ email, password }) {
   const existingUser = await prisma.user.findFirst({
@@ -17,12 +80,14 @@ export async function signup({ email, password }) {
 
   const passwordHash = await hash(password, 16);
 
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       email,
       password: passwordHash,
     },
   });
+
+  return await createUserSession(user.id, "/expenses?signup=1");
 }
 
 export async function login({ email, password }) {
@@ -44,5 +109,7 @@ export async function login({ email, password }) {
     throw error;
   }
 
-  return redirect("/expenses");
+  return await createUserSession(user.id, "/expenses?login=1");
 }
+
+export { getSession, commitSession };

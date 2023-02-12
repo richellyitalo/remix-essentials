@@ -1,6 +1,9 @@
-import Logo from '../util/Logo';
+import { Form, Link, useLoaderData } from "@remix-run/react";
+import Logo from "../util/Logo";
 
 function MainHeader() {
+  const userId = useLoaderData();
+
   return (
     <header id="main-header">
       <Logo />
@@ -17,9 +20,21 @@ function MainHeader() {
       <nav id="cta-nav">
         <ul>
           <li>
-            <a href="/auth" className="cta">
-              Login
-            </a>
+            {userId ? (
+              <Form
+                method="post"
+                action="/logout"
+              >
+                <button className="cta">Logout</button>
+              </Form>
+            ) : (
+              <Link
+                to="/auth"
+                className="cta"
+              >
+                Login
+              </Link>
+            )}
           </li>
         </ul>
       </nav>

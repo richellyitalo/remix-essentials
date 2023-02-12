@@ -1,3 +1,4 @@
+import { useRouteLoaderData } from "@remix-run/react";
 import { FaTrophy, FaHandshake } from "react-icons/fa";
 
 import PricingPlan from "~/components/marketing/PricingPlan";
@@ -20,6 +21,7 @@ const PRICING_PLANS = [
 ];
 
 export default function PricingPage() {
+
   return (
     <main id="pricing">
       <h2>Great Product, Simple Pricing</h2>
@@ -41,4 +43,3 @@ export default function PricingPage() {
     </main>
   );
 }
-

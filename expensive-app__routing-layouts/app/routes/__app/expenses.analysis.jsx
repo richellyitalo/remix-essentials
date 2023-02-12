@@ -17,7 +17,6 @@ export const links = () => [
 
 export async function loader() {
   const expenses = await getExpenses();
-  console.log(expenses);
 
   if (!expenses || expenses.length === 0) {
     throw json({ message: "aqui deu ruim" }, { status: 404 });
