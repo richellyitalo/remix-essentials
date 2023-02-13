@@ -5,15 +5,16 @@ import AdminHeader from "~/components/nav/AdminHeader";
 import { requireUserSession } from "~/data/auth.server";
 
 export async function loader ({ request }) {
-  await requireUserSession(request);
-  return null;
+  return await requireUserSession(request);
 }
 
 function Document({ children }) {
   return (
     <div className="bg-purple-500 min-h-screen">
       <div className="lg:w-2/3 sm:w-auto mx-auto p-2">
+      
         <AdminHeader />
+        
         <div className="bg-slate-100 p-3 rounded">{children}</div>
       </div>
     </div>

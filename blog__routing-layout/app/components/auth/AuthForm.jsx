@@ -1,17 +1,29 @@
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useNavigation,
+  useSearchParams,
+} from "@remix-run/react";
 import InputError from "../admin/shared/InputError";
 
 export default function AuthForm() {
   const validationErrors = useActionData();
   const [searchParams] = useSearchParams();
+  const navigation = useNavigation();
   const mode = searchParams.get("mode") || "login";
   const isLogin = mode === "login";
-  const title = isLogin ? "Login" : "Sign Up";
-  const textButtonSubmit = isLogin ? "Login" : "Sign up";
   const textAlternativeAction = isLogin
     ? "Create a new user"
     : "Login with a existing user";
   const gotoMode = isLogin ? "signup" : "login";
+  const isSubmitting = navigation.state !== "idle";
+  const title = isLogin ? "Login" : "Sign Up";
+  let textButtonSubmit = isSubmitting ? "Logging in..." : "Login";
+
+  if (!isLogin) {
+    textButtonSubmit = isSubmitting ? "Signing up..." : "Sign up";
+  }
 
   return (
     <Form method="post">
@@ -50,7 +62,12 @@ export default function AuthForm() {
       />
 
       <p class="flex">
-        <button className="p-2 px-4 bg-blue-200 rounded">
+        <button
+          disabled={isSubmitting}
+          className={`p-2 px-4 rounded ${
+            isSubmitting ? "bg-gray-200 text-gray-400" : "bg-blue-200"
+          }`}
+        >
           {textButtonSubmit}
         </button>
       </p>

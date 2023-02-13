@@ -44,6 +44,7 @@ export async function getPosts({ limit = null, userId = null} = {}) {
       paramsFind["where"] = { userId };
     }
 
+
     return await prisma.post.findMany(paramsFind);
   } catch (error) {
     console.log(error.message)

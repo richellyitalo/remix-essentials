@@ -4,10 +4,10 @@ import AddLink from "~/components/admin/shared/AddLink";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { getCategories, getPosts } from "~/data/blog.server";
 import { json } from "@remix-run/node";
-import { requireUserSession } from "~/data/auth.server";
+import { requireUserIdSession } from "~/data/auth.server";
 
 export async function loader({ request }) {
-  const userId = await requireUserSession(request);
+  const userId = await requireUserIdSession(request);
   const posts = await getPosts({userId});
   const categories = await getCategories();
 

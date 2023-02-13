@@ -1,7 +1,9 @@
-import { Form, Link, NavLink } from "@remix-run/react";
+import { Form, Link, NavLink, useLoaderData } from "@remix-run/react";
 import { AiOutlineRollback } from "react-icons/ai";
 
 export default function AdminHeader() {
+  const userSession = useLoaderData();
+
   return (
     <nav
       id="site-header"
@@ -44,6 +46,10 @@ export default function AdminHeader() {
             <AiOutlineRollback className="inline mr-1" />
             go to Website
           </Link>
+        </li>
+
+        <li className="break-all text-sm text-gray-500">
+          Hello, {userSession && userSession.email}
         </li>
       </ul>
     </nav>

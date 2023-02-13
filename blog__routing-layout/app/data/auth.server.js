@@ -71,7 +71,7 @@ export async function login({ email, password }) {
   return await createUserSession(user.id, "/admin");
 }
 
-export async function requireUserSession (request) {
+export async function requireUserIdSession (request) {
   const session = await sessionStorage.getSession(
     request.headers.get("Cookie")
   );
@@ -85,6 +85,14 @@ export async function requireUserSession (request) {
   }
 
   return userId;
+}
+
+export async function requireUserSession (request) {
+  const userId = await requireUserIdSession(request);
+
+  return await prisma.user.findFirst({
+    where: { id: userId }
+  });
 }
 
 export async function destroySession(request) {
