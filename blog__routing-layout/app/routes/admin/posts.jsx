@@ -4,11 +4,12 @@ import AddLink from "~/components/admin/shared/AddLink";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { getCategories, getPosts } from "~/data/blog.server";
 import { json } from "@remix-run/node";
+import { requireUserSession } from "~/data/auth.server";
 
-export async function loader() {
-  const posts = await getPosts();
+export async function loader({ request }) {
+  const userId = await requireUserSession(request);
+  const posts = await getPosts({userId});
   const categories = await getCategories();
-
 
   if (!categories || categories.length === 0) {
     throw json(

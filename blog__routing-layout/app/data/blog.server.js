@@ -28,7 +28,7 @@ export function validatePostRequest(input) {
  * Posts
  */
 
-export async function getPosts({ limit = null } = {}) {
+export async function getPosts({ limit = null, userId = null} = {}) {
   try {
     let paramsFind = {
       orderBy: { createdAt: "desc" },
@@ -40,8 +40,13 @@ export async function getPosts({ limit = null } = {}) {
       paramsFind["take"] = limit;
     }
 
+    if (userId) {
+      paramsFind["where"] = { userId };
+    }
+
     return await prisma.post.findMany(paramsFind);
   } catch (error) {
+    console.log(error.message)
     throw new Error("Failed to get posts");
   }
 }
@@ -59,7 +64,7 @@ export async function getPost(id) {
   }
 }
 
-export async function addPost (postData, userId) {
+export async function addPost(postData, userId) {
   try {
     return await prisma.post.create({
       data: {
@@ -69,8 +74,8 @@ export async function addPost (postData, userId) {
           connect: postData?.categories.map((id) => ({ id })),
         },
         user: {
-          connect: { id: userId }
-        }
+          connect: { id: userId },
+        },
       },
     });
   } catch (error) {
@@ -95,7 +100,7 @@ export async function updatePost(id, postData) {
   }
 }
 
-export async function deletePost (id) {
+export async function deletePost(id) {
   try {
     return await prisma.post.delete({
       where: { id },
@@ -172,7 +177,7 @@ export async function getCategory(categoryId) {
   }
 }
 
-export async function deleteCategory (id) {
+export async function deleteCategory(id) {
   try {
     return await prisma.category.delete({
       where: { id },
