@@ -59,7 +59,7 @@ export async function getPost(id) {
   }
 }
 
-export async function addPost(postData) {
+export async function addPost (postData, userId) {
   try {
     return await prisma.post.create({
       data: {
@@ -68,6 +68,9 @@ export async function addPost(postData) {
         categories: {
           connect: postData?.categories.map((id) => ({ id })),
         },
+        user: {
+          connect: { id: userId }
+        }
       },
     });
   } catch (error) {
