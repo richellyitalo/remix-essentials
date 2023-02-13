@@ -45,4 +45,7 @@
         "node_modules",
         "tailwind.config.js"
     ],
+    "[prisma]": {
+        "editor.defaultFormatter": "Prisma.prisma"
+    },
 }

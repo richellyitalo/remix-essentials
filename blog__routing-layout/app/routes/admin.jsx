@@ -2,6 +2,12 @@ import { Outlet, useCatch } from "@remix-run/react";
 import Code from "~/components/admin/shared/Code";
 import Error from "~/components/admin/shared/Error";
 import AdminHeader from "~/components/nav/AdminHeader";
+import { requireUserSession } from "~/data/auth.server";
+
+export async function loader ({ request }) {
+  await requireUserSession(request);
+  return null;
+}
 
 function Document({ children }) {
   return (

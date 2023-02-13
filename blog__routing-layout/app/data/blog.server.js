@@ -130,14 +130,6 @@ export async function addCategory(categoryData) {
 
 export async function updateCategory(id, categoryData) {
   try {
-    console.log({
-      where: {
-        id,
-      },
-      data: {
-        name: categoryData.name,
-      },
-    });
     return await prisma.category.update({
       where: {
         id,

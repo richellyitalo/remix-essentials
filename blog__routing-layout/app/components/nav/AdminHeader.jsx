@@ -1,4 +1,4 @@
-import { Link, NavLink } from "@remix-run/react";
+import { Form, Link, NavLink } from "@remix-run/react";
 import { AiOutlineRollback } from "react-icons/ai";
 
 export default function AdminHeader() {
@@ -26,12 +26,14 @@ export default function AdminHeader() {
           </NavLink>
         </li>
         <li className="mr-6">
-          <NavLink
-            className="text-white p-2 rounded-md bg-purple-500 hover:text-purple-200 hover:bg-purple-700"
-            to="/logout"
+          <Form
+            method="post"
+            action="/logout"
           >
-            Logout
-          </NavLink>
+            <button className="text-white p-2 rounded-md bg-purple-500 hover:text-purple-200 hover:bg-purple-700">
+              Logout
+            </button>
+          </Form>
         </li>
         <li className="mr-6">
           <Link
