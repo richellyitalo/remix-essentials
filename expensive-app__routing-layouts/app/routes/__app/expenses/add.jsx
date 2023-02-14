@@ -27,6 +27,10 @@ export async function loader ({ request }) {
   return null;
 }
 
+export const meta = () => ({
+  title: "Add Expense",
+})
+
 export default function Add() {
   const navigate = useNavigate();
 

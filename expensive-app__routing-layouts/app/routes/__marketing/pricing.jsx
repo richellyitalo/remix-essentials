@@ -20,6 +20,23 @@ const PRICING_PLANS = [
   },
 ];
 
+export function meta () {
+  return {
+    title: "Pricing",
+    description: "Expenses pricing page"
+  }
+}
+
+export function headers ({
+  actionHeaders,
+  loaderHeaders,
+  parentHeaders
+}) {
+  return {
+    "Cache-Control": parentHeaders.get("Cache-Control"),
+  }
+}
+
 export default function PricingPage() {
 
   return (

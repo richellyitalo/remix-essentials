@@ -35,7 +35,17 @@ export async function action({ request }) {
       return { credentials: error.message };
     }
 
-    return { credentials: "Something wront went." };
+    return { credentials: "Something wrong went." };
+  }
+}
+
+export function headers ({
+  actionHeaders,
+  loaderHeaders,
+  parentHeaders
+}) {
+  return {
+    "Cache-Control": parentHeaders.get("Cache-Control"),
   }
 }
 

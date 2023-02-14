@@ -52,6 +52,17 @@ export async function action({ request, params }) {
 //   }
 // }
 
+export function meta({ params, parentsData }) {
+  const expense = parentsData["routes/__app/expenses"].find(
+    (expense) => expense.id === params.id
+  );
+
+  return {
+    title: "Edit Expense: " + expense.title,
+    description: "Edit page expense",
+  };
+}
+
 export default function ExpensesAddPage() {
   const navigate = useNavigate();
 

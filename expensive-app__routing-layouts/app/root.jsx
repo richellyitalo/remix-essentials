@@ -39,11 +39,10 @@ export const links = () => [
 ];
 
 function Document({ children, title }) {
-
   return (
     <html lang="en">
       <head>
-        <title>{title}</title>
+        {title && <title>{title}</title>}
         <Meta />
         <Links />
       </head>
@@ -67,6 +66,7 @@ export default function App() {
 
 export function CatchBoundary() {
   const catchData = useCatch();
+  
   return (
     <Document title={catchData.statusText}>
       <Error title={catchData.statusText}>

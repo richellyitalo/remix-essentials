@@ -8,7 +8,7 @@ import { getExpenses } from "~/data/expenses.server";
 import expensesLayoutStyles from "~/styles/expenses.css";
 
 export const meta = () => ({
-  title: "Admin/Expenses",
+  title: "Expenses Panel",
 });
 
 export const links = () => [
