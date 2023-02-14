@@ -8,6 +8,12 @@ export function loader ({params}) {
   return getCategory(categoryId);
 }
 
+export function meta ({ data: category }) {
+  return {
+    title: `Posts of category: ${category.name}`
+  }
+}
+
 export default function CategoriesDetailPage () {
   const category = useLoaderData();
 

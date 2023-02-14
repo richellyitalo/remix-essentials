@@ -15,7 +15,7 @@ import Code from "./components/admin/shared/Code";
 
 export const meta = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Blog with Remix",
   viewport: "width=device-width,initial-scale=1",
 });
 

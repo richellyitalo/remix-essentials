@@ -8,6 +8,18 @@ export function loader({ params }) {
   return getCategories(categoryId);
 }
 
+export function meta () {
+  return {
+    title: "Categories"
+  }
+}
+
+export function headers ({ parentHeaders }) {
+  return {
+    "Cache-Control": parentHeaders.get("Cache-Control"),
+  }
+}
+
 export default function CategoriesPage () {
   const categories = useLoaderData();
   return (

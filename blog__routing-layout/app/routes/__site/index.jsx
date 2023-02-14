@@ -25,6 +25,14 @@ export async function loader() {
   return posts;
 }
 
+export function headers ({
+  parentHeaders
+}) {
+  return {
+    "Cache-Control": parentHeaders.get("Cache-Control"),
+  }
+}
+
 export default function SiteHomePage() {
   const posts = useLoaderData();
 

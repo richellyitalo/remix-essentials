@@ -11,7 +11,7 @@ export default function PostListItem({ category: post }) {
       className="post-list-item mb-3 border-b pb-4"
     >
       <Link
-        to={post.id}
+        to={`/post/${post.id}`}
         className="text-blue-600 hover:underline block pb-2"
       >
         {post.title}

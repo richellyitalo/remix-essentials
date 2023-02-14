@@ -11,6 +11,23 @@ import {
   validatePostRequest,
 } from "~/data/blog.server";
 
+export function meta({ params, parentsData }) {
+  let title = "Add new Post";
+
+  if (params.postId) {
+    const post = parentsData["routes/admin/posts"].find(
+      (post) => post.id === params.postId
+    );
+    title = `Editing post: ${post.title}`;
+  }
+
+  // console.log(params)
+  // conso
+  return {
+    title,
+  };
+}
+
 export async function action({ request, params }) {
   const userId = await requireUserIdSession(request);
   const formData = await request.formData();

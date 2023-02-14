@@ -6,6 +6,19 @@ export function loader({ params }) {
   return getPost(postId);
 }
 
+export function meta({ data : post, params, parentsData }) {
+  const postInParent = parentsData["routes/__site"].posts.find(
+    (postParent) => postParent.id === params.id
+  );
+
+  // or just use variable "data:post"
+
+  return {
+    title: postInParent.title,
+    description: postInParent.content.slice(0, 60)
+  };
+}
+
 export default function PostPage() {
   const post = useLoaderData();
   function createMarkup(markup) {

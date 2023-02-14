@@ -19,6 +19,12 @@ export async function loader () {
   };
 }
 
+export function headers () {
+  return {
+    "Cache-Control": "max-age=1800"
+  }
+}
+
 
 export default function SiteLayout() {
   const location = useLocation();
